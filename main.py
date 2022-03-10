@@ -1,5 +1,6 @@
 from selenium import webdriver 
 import time
+from random import random
 
 url='https://www.instagram.com/accounts/login/?force_classic_login'
 proxies = open("proxies.txt","r")
@@ -9,11 +10,20 @@ for _ in proxies:
 #"https://instagram.com")
 
 def login(username,password):
+    browser = webdriver.Firefox()
     browser.delete_all_cookies()
     print("[+] deleted all cookies")
     prox = random.choice(proxy_list)
     print(f"[+]using proxy:{prox}\n")
-    chrome_options.add_argument(f"--proxy-server={prox}")
+    webdriver.DesiredCapabilities.FIREFOX['proxy']={
+           "httpProxy":prox,
+            "ftpProxy":prox,
+            "sslProxy":prox,
+            #"noProxy":None,
+            "proxyType":"manual"
+        }    
+    firefox_profile = webdriver.FirefoxProfile()
+    firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
     browser.get(url)
     time.sleep(2)
     browser.find_element_by_xpath("//*[@id=\"id_username\"]").clear()
