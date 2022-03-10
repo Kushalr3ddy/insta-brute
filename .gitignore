@@ -5,3 +5,4 @@ test-pass.txt
 tmp.txt
 test.py
 proxytest.py
+*.exe
