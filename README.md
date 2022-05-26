@@ -1,3 +1,4 @@
+NOTE: NOT ABLE TO MAINTAIN CONSISTENTLY DOESNT WORK AS OF NOW
 noob attempt at
 insta-gram brute force tool
 
