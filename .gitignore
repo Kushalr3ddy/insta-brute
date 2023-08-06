@@ -1,5 +1,4 @@
 chromedriver
-mikhil.txt
 packages.txt
 test-pass.txt
 tmp.txt
@@ -9,4 +8,7 @@ proxytest.py
 *.txt
 test2.py
 .vscode/
-geckodriver.log
+geckodriver.logdel.py 
+*geckodriver*
+*~*
+del.py
